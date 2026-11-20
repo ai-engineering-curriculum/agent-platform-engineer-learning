@@ -122,12 +122,12 @@ service:
       exporters: [prometheusremotewrite, datadog/llm]
 ```
 
-<!-- needs-research: the exact processor names, option fields, and exporter inventory in the contrib distribution evolve across minor versions; before copying this config, verify against the current `opentelemetry-collector-contrib` README and the specific release's component list. -->
+Processor names, option fields, and exporter inventory in the contrib distribution evolve across minor versions; before copying this config, verify against the current `opentelemetry-collector-contrib` README and the specific release's component list.
 
 Three features worth calling out:
 
 - **The `transform/redact_content` processor strips content attributes.** The semantic-convention-aware redactor lives here. A chapter 02 invariant ("content never ships on the shared pipeline") becomes one block of config. Spans arrive with attributes; the processor deletes `gen_ai.prompt` and `gen_ai.completion` on every span and `gen_ai.message.content` on every span event. The content got to the content store via a separate path (next section).
-- **`tail_sampling` keeps the interesting traces.** Errors and guardrail-flagged traces survive at 100%; everything else at 10%. The numbers are per tenant / per cost target; <!-- needs-research: default sampling percentages are a cost / coverage tradeoff that depends on fleet volume and backend ingest cost. Tune per deployment and document the chosen value. -->.
+- **`tail_sampling` keeps the interesting traces.** Errors and guardrail-flagged traces survive at 100%; everything else is sampled at a configurable rate. The numbers are per tenant / per cost target — tune per deployment and document the chosen value.
 - **`routing/by_tenant` fans out per tenant.** Two tenants on Langfuse, one on Phoenix, all on Datadog. One pipeline; routing decides destinations.
 
 ## The content-store split
@@ -162,7 +162,7 @@ exporters:
 
 The platform's contract to Langfuse is "the spans we send carry the GenAI semconv attributes". Langfuse displays them. For tenants that run self-hosted Langfuse (behind their VPC), the exporter targets their endpoint instead. Per-tenant endpoint selection is the `routing/by_tenant` processor's job.
 
-OpenLLMetry ships both an SDK and a traceloop-cloud destination. The platform does not use the OpenLLMetry SDK directly (it would be a competing emission path alongside the platform's own); it uses the OTel SDK plus the platform's semconv package. The OpenLLMetry contribution the platform does adopt is their instrumentation libraries (`opentelemetry-instrumentation-openai`, etc.) where their coverage exceeds the main contrib repo's. <!-- needs-research: the overlap between `openllmetry` instrumentation packages and upstream `opentelemetry-python-contrib` shifts quarter by quarter; pick per package based on current maintenance status. -->
+OpenLLMetry ships both an SDK and a traceloop-cloud destination. The platform does not use the OpenLLMetry SDK directly (it would be a competing emission path alongside the platform's own); it uses the OTel SDK plus the platform's semconv package. The OpenLLMetry contribution the platform does adopt is their instrumentation libraries (`opentelemetry-instrumentation-openai`, etc.) where their coverage exceeds the main contrib repo's. The overlap between `openllmetry` instrumentation packages and upstream `opentelemetry-python-contrib` shifts over time; pick per package based on current maintenance status.
 
 ### Arize Phoenix: OTLP + OpenInference translation
 
@@ -188,7 +188,7 @@ processors:
             where attributes["gen_ai.usage.input_tokens"] != nil
 ```
 
-<!-- needs-research: OpenInference / Phoenix attribute mapping is tracked in the OpenInference spec and the Phoenix docs; the illustrative statements above should be regenerated from the current spec before use. -->
+OpenInference / Phoenix attribute mapping is tracked in the [OpenInference spec](https://arize-ai.github.io/openinference/) and the [Phoenix docs on translating semantic conventions](https://arize.com/docs/phoenix/tracing/concepts-tracing/translating-conventions); regenerate the illustrative statements above from the current spec before use.
 
 A tenant that chose Phoenix sees traces with the familiar Phoenix layout; the emitting planes did no Phoenix-specific work. Translation is a collector processor the platform owns. When OpenInference and semconv fully converge, the processor drops to a no-op.
 
@@ -207,7 +207,7 @@ exporters:
     hostname: ${HOSTNAME}
 ```
 
-The platform's contract to Datadog is "the spans we send carry the GenAI semconv attributes"; the exporter translates. A nuance: Datadog's LLM Observability product consumes certain Datadog-specific attributes (`llm.model`, `llm.application`) for product-level panels. The exporter is configured to synthesise these from semconv names, so the emitting planes continue to speak semconv. <!-- needs-research: Datadog periodically updates which attributes LLM Observability consumes natively. Re-verify mappings against current product docs before each exporter config change. -->
+The platform's contract to Datadog is "the spans we send carry the GenAI semconv attributes"; the exporter translates. Datadog's Agent / LLM Observability product [natively consumes the OTel GenAI semconv attributes](https://www.datadoghq.com/blog/llm-otel-semantic-convention/) (from Datadog Agent v1.37 onward), mapping `gen_ai.request.model`, `gen_ai.usage.*`, `gen_ai.provider.name`, and `gen_ai.operation.name` into its latency, token-usage, cost, and finish-reason panels; re-verify the mappings against current product docs before each exporter config change.
 
 ### Grafana + Prometheus + Tempo: the open-source stack
 

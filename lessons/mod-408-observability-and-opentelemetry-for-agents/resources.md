@@ -30,7 +30,9 @@ All references on this page are primary / authoritative public sources at the ti
 - **Semantic Conventions — Generative AI attributes**: <https://opentelemetry.io/docs/specs/semconv/attributes-registry/gen-ai/>
 - **Semantic Conventions — repository (source of truth)**: <https://github.com/open-telemetry/semantic-conventions>
 - **Semantic Conventions — Weaver (tooling)**: <https://github.com/open-telemetry/weaver>
-<!-- needs-research: the GenAI semconv is still formally experimental as of writing; before pinning a version to production, read the current repo tags and stability declarations. -->
+- **Semantic Conventions — GenAI (dedicated repository, mid-2026 split)**: <https://github.com/open-telemetry/semantic-conventions-genai>
+
+The GenAI conventions remain in `development` status (no stable attribute, span, event, or metric) and now ship from the dedicated repo above; before pinning a version to production, read the current repo tags and stability declarations.
 
 ### Trace, metric, and log specifications
 - **OpenTelemetry — Traces specification**: <https://opentelemetry.io/docs/specs/otel/trace/>
@@ -151,7 +153,9 @@ All references on this page are primary / authoritative public sources at the ti
 - **EU AI Act — overview page (European Commission)**: <https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai>
 - **EU AI Act — implementation timeline (European Commission)**: <https://digital-strategy.ec.europa.eu/en/policies/ai-act>
 - **European AI Office**: <https://digital-strategy.ec.europa.eu/en/policies/ai-office>
-<!-- needs-research: the Commission is expected to publish implementing acts under Article 72(3) specifying post-market monitoring plan templates and the Article 73 reporting form; re-verify current status before shipping an export. -->
+- **Digital Omnibus on AI — Regulation (EU) 2026/1744 (EUR-Lex)**: <https://eur-lex.europa.eu/legal-content/EN/TXT/PDF/?uri=CELEX%3A32026R1744>
+
+The Digital Omnibus on AI replaced the Article 72(3) empowerment for a binding implementing act with a requirement that the Commission publish non-binding guidance, including a post-market monitoring plan template, by 2 September 2027; re-verify current status (and the Article 73 serious-incident reporting form) before shipping an export.
 
 ### Adjacent regulatory artefacts
 - **GPAI — General-Purpose AI Code of Practice (Commission)**: <https://digital-strategy.ec.europa.eu/en/policies/general-purpose-ai-code-practice>

@@ -85,7 +85,7 @@ One page covering:
 ## Starter guidance
 
 - **Pin the image versions.** Grafana, Prometheus, Tempo, the collector — all pin to specific release tags in the compose file. The APIs are stable; the defaults shift.
-- **Use the collector's `prometheusremotewrite` exporter, not Prometheus's OTLP receiver.** <!-- needs-research: Prometheus added native OTLP ingest in recent releases; verify current release-level support before swapping. The remote-write exporter path is the reliable default. -->
+- **Use the collector's `prometheusremotewrite` exporter, not Prometheus's OTLP receiver.** [Prometheus 3.0](https://prometheus.io/docs/prometheus/latest/feature_flags/) promoted native OTLP metrics ingest to stable, but it must be enabled explicitly (`--web.enable-otlp-receiver`), carries [efficiency caveats](https://prometheus.io/docs/prometheus/latest/querying/api/#otlp-receiver) for high-volume use, and supports only HTTP OTLP (not gRPC); the remote-write exporter path is the reliable default.
 - **Pre-provision data sources via Grafana provisioning YAML.** Clicking "Add data source" works for exploration; the exercise's reproducibility depends on provisioning files that live in the repo.
 - **Keep the dashboard JSON human-readable.** Grafana's JSON export is noisy by default; strip the panel ids and version history before committing.
 - **Mark `<!-- needs-research: ... -->` on any cost figure.** Prices move; a $0.0030 per-1k-token rate in a load generator is an illustrative value, not a quote. Chapter 06 and mod-406 chapter 04 both call out the pattern.

@@ -69,7 +69,7 @@ service:
     traces: { receivers: [otlp], processors: [batch], exporters: [file] }
 ```
 
-<!-- needs-research: the exact exporter / processor option fields shift across collector minor versions; verify this YAML against the current contrib distribution before running. -->
+The exact exporter / processor option fields shift across collector minor versions; verify this YAML against the current contrib distribution before running.
 
 ### Part 4 — The green run
 

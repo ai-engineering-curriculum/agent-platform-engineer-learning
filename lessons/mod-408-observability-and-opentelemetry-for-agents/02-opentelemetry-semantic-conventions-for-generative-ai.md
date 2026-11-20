@@ -4,7 +4,7 @@ Chapter 01 pinned the slice. The first job inside the slice is the vocabulary: w
 
 This chapter walks the standard, picks the pieces the platform actually commits to, writes down the extensions the platform must author beyond it, and defines versioning rules so the vocabulary evolves without silent breakage. The output is what chapter 05's conformance tests check against.
 
-> **Status note.** The OTel GenAI conventions are, as of writing, still formally in `development` / `experimental` status in the [semantic-conventions repo](https://github.com/open-telemetry/semantic-conventions/tree/main/model/gen-ai). They are the best public contract that exists, and the major LLM observability vendors (Langfuse, Phoenix, Datadog, OpenLLMetry) emit or consume them. But the exact attribute inventory shifts between spec revisions. <!-- needs-research: confirm the current stability level and attribute inventory against the latest tag of open-telemetry/semantic-conventions before committing a semconv version to production. --> Chapter 05's conformance tests pin a version and fail CI when a plane drifts; chapter 04's collector enforces the pinned version at export.
+> **Status note.** The OTel GenAI conventions remain in `development` status — in mid-2026 they were moved out of the core [semantic-conventions](https://github.com/open-telemetry/semantic-conventions) repo into the dedicated [`semantic-conventions-genai`](https://github.com/open-telemetry/semantic-conventions-genai) repo so they can iterate independently, and no GenAI-specific span, event, metric, or attribute is marked `stable` in that repo. They are the best public contract that exists, and the major LLM observability vendors (Langfuse, Phoenix, Datadog, OpenLLMetry) emit or consume them. But the exact attribute inventory shifts between spec revisions, so pin a version and re-verify against the current repo tags before promotion. Chapter 05's conformance tests pin a version and fail CI when a plane drifts; chapter 04's collector enforces the pinned version at export.
 
 ## What semconv gives you
 
@@ -126,7 +126,7 @@ Two spans; one correlation id; one coherent trace. A dashboard query for "all to
 
 Semconv represents the *content* of a conversation — system messages, user prompts, assistant completions, tool-use blocks, tool results — as a sequence of events (or logs, depending on which part of the standard one reads) on the chat span. The relevant event names and their payload keys evolve with semconv revisions; the current naming is in the [`events` subsection of the GenAI conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/gen-ai-events/).
 
-<!-- needs-research: the event schema (names like `gen_ai.user.message`, `gen_ai.assistant.message`, `gen_ai.tool.message`, `gen_ai.system.message`, `gen_ai.choice`) has been refined across semconv revisions; before committing to a payload shape, re-read the current spec and the `semantic-conventions` repo's `model/gen-ai/events.yaml`. -->
+The current spec uses event names of the form `gen_ai.{role}.message` (`gen_ai.user.message`, `gen_ai.assistant.message`, `gen_ai.tool.message`, `gen_ai.system.message`) plus `gen_ai.choice` for the completion, but the shape has been refined across semconv revisions — re-read the current spec and the GenAI repo's event YAML before committing to a payload shape.
 
 The platform's rule for prompt / completion events is firm:
 
@@ -219,7 +219,7 @@ The [OpenInference specification](https://arize-ai.github.io/openinference/) —
 - **Semconv is the platform's primary vocabulary.** All instrumentation emits semconv.
 - **OpenInference is a compatibility concern at the exporter.** Chapter 04 details the Phoenix exporter path, which translates semconv attributes into OpenInference attributes where they diverge. The SDK does not emit OpenInference directly; the collector translates.
 
-The two standards are converging — the [OpenInference project](https://github.com/Arize-ai/openinference) tracks semconv for new attributes, and the OTel GenAI working group reviews OpenInference proposals. The platform assumes convergence; the exporter translator is scoped as a temporary artefact. <!-- needs-research: as of writing, the convergence story is incomplete and the exporter translator is still load-bearing. Re-evaluate before each SDK shim release. -->
+The two standards are converging — the [OpenInference project](https://github.com/Arize-ai/openinference) tracks semconv for new attributes, and Phoenix shipped server-side [auto-conversion of OTel GenAI semconv attributes](https://arize.com/docs/phoenix/release-notes/05-2026/05-15-2026-otel-semconv-conversion) in 2026 so OTel-native spans render in Phoenix's UI. Convergence is incomplete, however, and a handful of OpenInference span kinds (reranker, guardrail, evaluator, decision) are not yet covered by OTel GenAI; re-evaluate the translator before each SDK shim release.
 
 ## Summary
 
