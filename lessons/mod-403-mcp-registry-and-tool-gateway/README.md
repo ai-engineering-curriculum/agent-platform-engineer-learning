@@ -40,7 +40,7 @@ External references — primary sources only — are catalogued in [`resources.m
 1. Read the seven chapters in order. The authorization chapter (02) presumes you have the plane-and-obligations frame (01); the registry chapter (03) assumes the auth model; the conformance chapter (04) reads from the registry; the auth-wrapping proxy chapter (05) is where the auth story meets the legacy world; the build-vs-buy chapter (06) places the vendor landscape against everything above; the audit chapter (07) is the thing that holds all six accountable.
 2. Do exercise 01 before reading chapter 04 if you want the fastest feedback — your registry schema is what the conformance pipeline writes into and the audit pipeline references. The other exercises assume exercise 01's artefact exists.
 3. Read the RFCs listed for chapter 02. The MCP authorization spec is a thin binding layer over a stack of RFCs; a surface understanding of the layer is not enough to design the gateway's auth. The investment pays back everywhere later in this module and across mod-405.
-4. Mark `<!-- needs-research: ... -->` on any claim you cannot verify against the current MCP spec revision or vendor documentation. The MCP spec, the registry work, and the vendor landscape are all in motion through 2026; the flag is cheaper than silently guessing, and auto-merge will block on it.
+4. Flag any claim you cannot verify against the current MCP spec revision or vendor documentation with the track's standard research-needed HTML comment marker. The MCP spec, the registry work, and the vendor landscape are all in motion through 2026; the flag is cheaper than silently guessing, and auto-merge will block on it.
 
 ## Where the handoffs land
 

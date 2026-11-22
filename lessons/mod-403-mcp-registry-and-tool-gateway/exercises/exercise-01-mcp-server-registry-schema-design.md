@@ -71,7 +71,7 @@ Each entry must:
 - Pick a schema language you would actually use. JSON Schema is the obvious fit if your gateway speaks JSON end-to-end (and MCP does). Protobuf is better if the registry is a gRPC service. Both are valid; commit to one.
 - Be opinionated about identifiers. `id` as a kebab-case slug? `id` as a UUID? Both exist? Pick and justify in a one-sentence comment.
 - The two worked entries are where your abstract schema meets concrete tool reality. If an entry feels awkward to write, the schema is probably the problem — go back and fix the schema, not the entry.
-- Mark `<!-- needs-research: ... -->` for any field whose current MCP spec detail you cannot verify (e.g. the exact shape of `inputSchema` in the current revision). The flag blocks auto-merge; it is cheaper than silently guessing.
+- Flag any field whose current MCP spec detail you cannot verify (e.g. the exact shape of `inputSchema` in the current revision) with the track's standard research-needed HTML comment marker. The flag blocks auto-merge; it is cheaper than silently guessing.
 
 ## Acceptance criteria
 
@@ -83,7 +83,7 @@ Mark done when:
 - [ ] Both worked entries validate against the schema.
 - [ ] The two entries exercise at least three distinct `AuthModel` shapes between them (one OAuth 2.1, one AuthWrapper; or add stdio if a third tool fits).
 - [ ] You can name, at the field level, which fields the policy plane (mod-405), the audit pipeline (chapter 07), the SDK (mod-412), and the SRE plane (mod-410) read. Write this cross-reference as a short appendix.
-- [ ] You have flagged any unverified MCP-spec detail with `<!-- needs-research: ... -->`.
+- [ ] You have flagged any unverified MCP-spec detail with the track's standard research-needed HTML comment marker.
 
 ## Stretch goals
 

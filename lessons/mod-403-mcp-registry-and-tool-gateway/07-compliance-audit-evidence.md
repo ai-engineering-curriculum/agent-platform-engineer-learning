@@ -7,7 +7,7 @@ This chapter is the specification for producing the second kind. It is the thing
 ## Who reads these records, and why
 
 - **External auditors (SOC 2, ISO 27001, regulatory).** Sample-test "show me every invocation of a high-risk tool in Q3." Need immutability, retention, chain of custody, redaction of PII without destroying evidential value.
-- **EU AI Act Article 72 obligations.** Post-market monitoring for high-risk AI systems requires an evidence trail of outputs, incidents, and corrective actions. Your tool-invocation records are one strand of the evidence pack project-403 assembles. <!-- needs-research: confirm the current scope of Article 72 record-keeping requirements in effect as of your audit cycle; delegated acts have been evolving. -->
+- **EU AI Act Article 72 obligations.** Providers of high-risk AI systems must operate a post-market monitoring system that actively and systematically collects, documents, and analyses performance data across the system's lifetime ([Article 72](https://www.euaiact.com/article/72)). The Commission's binding template for the monitoring plan was removed by the Digital Omnibus on AI (Regulation (EU) 2026/1744, in force 27 July 2026); non-binding guidance, including a template, is due by 2 September 2027. Your tool-invocation records are one strand of the evidence pack project-403 assembles.
 - **Incident responders.** "A token was leaked; what did it touch?" or "A tool returned bad data; who saw it and how?" They query by principal, by tool, by time, by trace.
 - **Product teams.** "Our agent is misbehaving; why?" They query by session, cross-reference with traces (mod-408) and replays (mod-407).
 - **Platform governance.** "Is scope X being used? By whom? Should we deprecate it?" They query aggregates.

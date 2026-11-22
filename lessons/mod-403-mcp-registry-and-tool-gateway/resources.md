@@ -44,7 +44,7 @@ All references on this page are primary / authoritative public sources at the ti
 
 ### MCP registry work in the wild
 
-- **MCP Registry (community effort / reference registry)**: <https://github.com/modelcontextprotocol/registry> <!-- needs-research: confirm the current status of the official MCP registry project and its hosted index at your onboarding; this effort has been in motion through 2025-2026. -->
+- **MCP Registry (official project; API and reference registry)**: <https://github.com/modelcontextprotocol/registry>. The hosted preview index is at <https://registry.modelcontextprotocol.io>; the registry has been in preview since the September 2025 launch ([announcement](https://blog.modelcontextprotocol.io/posts/2025-09-08-mcp-registry-preview/)) and breaking changes are still possible before GA, so verify the current state at your onboarding.
 
 ### Versioning + deprecation
 
@@ -118,7 +118,7 @@ Vendor landscape changes quickly. Verify at your onboarding.
 - **Toolhouse** — hosted tool execution and registry: <https://toolhouse.ai/>
 - **LiteLLM / LiteLLM Proxy** (adjacent model-gateway + tool-adjacent primitives; cross-reference mod-406): <https://docs.litellm.ai/>
 - **Portkey — AI gateway**: <https://portkey.ai/docs>
-- **Model Context Protocol — awesome-mcp lists** (community-maintained; useful for scouting the ecosystem): <https://github.com/punkpeye/awesome-mcp-servers> <!-- needs-research: confirm this is the most actively maintained list at your reading time. -->
+- **Model Context Protocol — awesome-mcp lists** (community-maintained; useful for scouting the ecosystem): <https://github.com/punkpeye/awesome-mcp-servers>. The punkpeye list is still the most-starred and most actively maintained curated index as of late 2026; cross-check against the official registry's hosted index before relying on it alone.
 - **Google SRE Workbook — Managing Risk** (background for the portfolio framing): <https://sre.google/workbook/managing-risk/>
 
 ## Chapter 07 — Compliance Audit Evidence
@@ -126,7 +126,7 @@ Vendor landscape changes quickly. Verify at your onboarding.
 ### Regulatory and standards baselines
 
 - **EU AI Act — Regulation (EU) 2024/1689**: <https://eur-lex.europa.eu/eli/reg/2024/1689/oj>
-- **EU AI Act — Article 72 (Post-market monitoring by providers and post-market monitoring plan for high-risk AI systems)**: inside the regulation linked above; cross-reference the latest delegated acts. <!-- needs-research: confirm whether specific record-keeping delegated acts under Article 72 have entered into force at your audit cycle. -->
+- **EU AI Act — Article 72 (Post-market monitoring by providers and post-market monitoring plan for high-risk AI systems)**: inside the regulation linked above. The Digital Omnibus on AI, [Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj/eng) (in force 27 July 2026), removed the Commission's power to adopt a binding template for the monitoring plan; non-binding Commission guidance is due by 2 September 2027. Check for subsequent guidance or delegated acts at your audit cycle.
 - **ISO/IEC 27001:2022** (information security management): <https://www.iso.org/standard/27001>
 - **AICPA Trust Services Criteria (SOC 2)**: <https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services>
 - **NIST AI Risk Management Framework**: <https://www.nist.gov/itl/ai-risk-management-framework>
@@ -154,11 +154,11 @@ Vendor landscape changes quickly. Verify at your onboarding.
 
 - **OWASP Top 10 for LLM Applications** (the baseline threat model this plane defends against; previewed in mod-411): <https://genai.owasp.org/llm-top-10/>
 - **OWASP Agentic AI — Threats and Mitigations** (the agent-specific extension): <https://genai.owasp.org/initiatives/#agentic-security-initiative>
-- **A2A (Agent-to-Agent) protocol** (preview for mod-409; relevant because A2A messages often ride through the tool-gateway plane): <https://a2aprotocol.ai/> <!-- needs-research: confirm the canonical spec URL for A2A at your reading time; this has been moving between hosts. -->
+- **A2A (Agent-to-Agent) protocol** (preview for mod-409; relevant because A2A messages often ride through the tool-gateway plane): canonical specification at <https://a2a-protocol.org/latest/specification/> under Linux Foundation governance (Google donated the project in 2025).
 - **IETF — HTTP Semantics (RFC 9110)** (for the HTTP-layer behaviours Streamable HTTP relies on): <https://datatracker.ietf.org/doc/html/rfc9110>
 
 ## Notes on using these references
 
 - Everything on this page is a **primary** or **authoritative-public** source. If a vendor doc reads like marketing, go to the vendor's engineering reference; if a blog post summarises an RFC, go to the RFC.
-- The MCP spec, the MCP authorization spec, the MCP registry work, and the vendor product scopes are all in a particularly fast-moving phase. Before quoting a specific wire-level detail or vendor capability in an exercise artefact or architecture memo, verify against the current doc and mark `<!-- needs-research: ... -->` if your spec reference does not match the version on this page.
+- The MCP spec, the MCP authorization spec, the MCP registry work, and the vendor product scopes are all in a particularly fast-moving phase. Before quoting a specific wire-level detail or vendor capability in an exercise artefact or architecture memo, verify against the current doc and flag any mismatch with the track's standard research-needed HTML comment marker.
 - `JOB_REQUIREMENTS.md` at the track root and `.aicg/job-requirements.json` carry the normalised, machine-readable form of the track's citations.

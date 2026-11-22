@@ -115,7 +115,7 @@ For each scenario, write the *exact* specification line that mitigates it (quoti
 
 - Keep the spec *concrete*. "Validate the response" is not a specification; "Verify `aud == mcp_x.identifier`, reject with `invalid_token` otherwise" is.
 - Avoid branches you will not implement. If you will not support confidential clients in the gateway's first year, say "confidential clients not supported; admission rejects authorization servers requiring them" rather than writing a never-used branch.
-- Verify every RFC citation. If a claim about an RFC's content does not survive a read of the RFC, mark `<!-- needs-research: ... -->` on the claim.
+- Verify every RFC citation. If a claim about an RFC's content does not survive a read of the RFC, flag it with the track's standard research-needed HTML comment marker.
 - Draw the sequence with real endpoints. `tool.example.com` and `auth.example.com` are fine; `endpoint_1` is not.
 - Where the MCP authorization spec is itself in flux between revisions, pin the revision you spec against and make the pin visible in the document.
 
@@ -129,7 +129,7 @@ Mark done when:
 - [ ] Part 2's scope-narrowing runbook lists a concrete fallback for authorization servers without token-exchange support.
 - [ ] Part 2's impersonation runbook specifies the actor-claim validation duty on the downstream.
 - [ ] Part 3's three scenarios each have a direct mitigation referenced to a line of your spec.
-- [ ] You have flagged any unverified RFC detail or MCP-revision detail with `<!-- needs-research: ... -->`.
+- [ ] You have flagged any unverified RFC detail or MCP-revision detail with the track's standard research-needed HTML comment marker.
 
 ## Stretch goals
 

@@ -117,7 +117,7 @@ Mark done when:
 - [ ] The attribution plan states, in one paragraph, how user identity is preserved end-to-end even if the downstream cannot.
 - [ ] The scope mapping has at least three scopes, each with description, downstream permission, and constraints.
 - [ ] All seven anti-patterns have a direct, non-hand-waving rebuttal.
-- [ ] You have flagged any unverified downstream-system or federation-primitive detail with `<!-- needs-research: ... -->`.
+- [ ] You have flagged any unverified downstream-system or federation-primitive detail with the track's standard research-needed HTML comment marker.
 
 ## Stretch goals
 

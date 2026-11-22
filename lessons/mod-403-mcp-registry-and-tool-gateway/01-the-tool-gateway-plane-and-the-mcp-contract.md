@@ -17,7 +17,7 @@ The protocol has three primitives:
 Three **transports** are defined:
 
 - **stdio.** Client spawns the server as a subprocess; messages flow over stdin/stdout. This is the transport local tools use (file-system access, process shelling, your IDE's dev server).
-- **Streamable HTTP.** The current remote transport. A single endpoint accepts POSTed JSON-RPC requests and streams responses (and server-initiated notifications) back via Server-Sent Events or chunked HTTP. In the current revision this replaced the two-endpoint HTTP+SSE transport from earlier drafts; existing servers in the wild may still speak the old shape, so your gateway has to recognise both. <!-- needs-research: confirm the exact revision at which Streamable HTTP superseded HTTP+SSE in the MCP spec and whether backward compatibility is still normative. -->
+- **Streamable HTTP.** The current remote transport. A single endpoint accepts POSTed JSON-RPC requests and streams responses (and server-initiated notifications) back via Server-Sent Events or chunked HTTP. The 2025-03-26 spec revision introduced it as the replacement for the two-endpoint HTTP+SSE transport from the 2024-11-05 revision; the spec describes an optional backwards-compatibility path for clients and servers that still need to speak the old shape, so your gateway has to recognise both ([MCP transports spec, 2025-03-26](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports)).
 - **WebSocket.** Reserved for low-latency / bidirectional cases. Seen rarely; your plane can defer deciding how to support it.
 
 The **lifecycle** has three phases:

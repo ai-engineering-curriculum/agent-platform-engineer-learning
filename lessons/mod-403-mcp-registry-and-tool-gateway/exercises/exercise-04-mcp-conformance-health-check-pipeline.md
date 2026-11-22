@@ -122,7 +122,7 @@ Mark done when:
 - [ ] The five SLIs each have a precise measurement definition, a proposed SLO value, and an alerting cadence.
 - [ ] The probe runner's HealthEvent shape conforms to chapter 04 (`server_id`, `version`, `probe_name`, `outcome`, `details`, `observed_at`, `observer_id`).
 - [ ] The spec documents which probes are staging-only versus production-safe and why.
-- [ ] You have flagged any unverified MCP-spec detail or Inspector detail with `<!-- needs-research: ... -->`.
+- [ ] You have flagged any unverified MCP-spec detail or Inspector detail with the track's standard research-needed HTML comment marker.
 
 ## Stretch goals
 
