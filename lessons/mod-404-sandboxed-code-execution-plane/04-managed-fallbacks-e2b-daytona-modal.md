@@ -12,7 +12,7 @@ This chapter pins how to integrate three concrete managed sandboxes — E2B, Day
 
 ## The vendor landscape, at the shape a platform engineer cares about
 
-Three vendors cover most of the design space agent platforms see today. The vendor landscape moves fast; verify current scopes and SDKs at your onboarding. <!-- needs-research: vendor product scopes and SDK surface change quickly; re-verify E2B, Daytona, and Modal Sandboxes at the time of reading. -->
+Three vendors cover most of the design space agent platforms see today. The vendor landscape moves fast; verify current scopes and SDKs at your onboarding against each vendor's own documentation.
 
 ### E2B — [`e2b.dev`](https://e2b.dev/)
 

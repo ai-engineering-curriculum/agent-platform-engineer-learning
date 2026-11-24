@@ -40,7 +40,7 @@ Equivalent discipline: image build is the security review point, the warm pool i
 
 ### Kata — hypervisor-backed snapshot options
 
-Kata inherits its snapshot support from the VMM it uses. With the Firecracker-backed Kata configuration, snapshot restore is available; with QEMU-backed Kata, snapshot semantics match the VMM's live-migration / save-state support. <!-- needs-research: confirm which Kata VMM back-ends ship snapshot/restore support at your reading time; the Firecracker and Cloud Hypervisor backends have differing maturity. See the Kata repo: https://github.com/kata-containers/kata-containers -->
+Kata's snapshot/restore posture depends on both the VMM backend and the Kata runtime. Firecracker-backed Kata does not currently expose VM-level snapshot/restore through the runtime ([kata-containers#13754](https://github.com/kata-containers/kata-containers/issues/13754) tracks this gap); VM-snapshot primitives for QEMU, Cloud Hypervisor, and Dragonball are being added under the runtime-rs rewrite ([kata-containers#14506](https://github.com/kata-containers/kata-containers/pull/14506)). Confirm backend maturity against the [Kata repo](https://github.com/kata-containers/kata-containers) at your reading time.
 
 ### WASM / Pyodide — module caching and instance reuse
 

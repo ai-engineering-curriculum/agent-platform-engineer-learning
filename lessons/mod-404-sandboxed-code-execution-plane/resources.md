@@ -162,7 +162,7 @@ Vendor product scopes and SDK surfaces change quickly. Verify against the vendor
 
 ### Regulatory / standards baselines
 - **EU AI Act — Regulation (EU) 2024/1689**: <https://eur-lex.europa.eu/eli/reg/2024/1689/oj>
-- **EU AI Act — Article 72 (post-market monitoring)**: in the regulation above; cross-reference any delegated acts in force at your audit cycle. <!-- needs-research: confirm whether specific record-keeping delegated acts under Article 72 have entered into force at your audit cycle. -->
+- **EU AI Act — Article 72 (post-market monitoring)**: in the regulation above. Article 72 applies from 2 August 2026; the implementing-act empowerment for a binding plan template was removed by the Digital Omnibus on AI ([Regulation (EU) 2026/1744](https://eur-lex.europa.eu/eli/reg/2026/1744/oj)) and replaced with Commission guidance (including a template) due by 2 September 2027.
 - **GDPR — Regulation (EU) 2016/679** (Article 17 right to erasure): <https://eur-lex.europa.eu/eli/reg/2016/679/oj>
 - **ISO/IEC 27001:2022**: <https://www.iso.org/standard/27001>
 - **AICPA — Trust Services Criteria (SOC 2)**: <https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services>
@@ -183,7 +183,7 @@ Vendor product scopes and SDK surfaces change quickly. Verify against the vendor
 - **Anthropic — Building Effective Agents** (agent-authoring context the plane hosts): <https://www.anthropic.com/research/building-effective-agents>
 - **OpenAI — A Practical Guide to Building Agents**: <https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf>
 - **Model Context Protocol — specification** (cross-ref mod-403): <https://modelcontextprotocol.io/specification>
-- **A2A (Agent-to-Agent) protocol** (preview for mod-409): <https://a2aprotocol.ai/> <!-- needs-research: confirm the canonical spec URL for A2A at your reading time; this has been moving between hosts. -->
+- **A2A (Agent-to-Agent) protocol** (preview for mod-409): <https://a2a-protocol.org/latest/specification/> (Linux Foundation / Agentic AI Foundation; the spec moved hosts after Google's June 2025 transfer, verify at your reading time).
 - **JOB_REQUIREMENTS.md** (at the track root): the normalised list of citations the curriculum is written against.
 
 ## Notes on using these references

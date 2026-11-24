@@ -78,7 +78,7 @@ Three practical requirements shape the storage layer.
 Records are **append-only**. No in-place update is possible by design, not just by convention. Three common substrates:
 
 - **Object storage with object lock.** Write each record (or batch) to S3 / GCS / Azure Blob with the object-lock / bucket-lock primitive engaged in compliance mode for the retention horizon. (S3 Object Lock, GCS Bucket Lock, Azure Blob immutable-storage.)
-- **Append-only ledger / WORM database.** Dedicated primitives — AWS QLDB (deprecated at some providers, verify) <!-- needs-research: confirm current status of AWS QLDB and equivalent WORM ledger products at your reading time. --> — or a Kafka-shaped log that ingests the records with compacted retention.
+- **Append-only ledger / WORM database.** Dedicated primitives — AWS QLDB was [discontinued on 31 July 2025](https://docs.aws.amazon.com/qldb/latest/developerguide/what-is.html), so on AWS the equivalent pattern is Aurora PostgreSQL with application-level ledger tables; equivalent WORM-ledger offerings exist from other providers, verify currency — or a Kafka-shaped log that ingests the records with compacted retention.
 - **Hash-chained batches.** Each batch's digest incorporates the previous batch's digest ([RFC 6920](https://datatracker.ietf.org/doc/html/rfc6920)-style naming). A tampered batch breaks the chain and the integrity check fails on read.
 
 Use at least two of these in combination: the object lock stops accidental deletion, the hash chain detects non-accidental tampering.
@@ -100,7 +100,7 @@ Retention is driven by the regulatory frame you sit inside, not a technical pref
 
 - **Incident response.** 90 days of searchable history.
 - **Audit (SOC 2, ISO 27001).** 1 year typically, 3 years in some scopes. Check your current controls with your assurance team.
-- **Regulatory (EU AI Act Article 72, sector-specific rules).** 6 or 10 years depending on the system's risk classification. The AI Act's post-market monitoring record horizon is at the long end of the range. <!-- needs-research: confirm the current record-keeping horizon required by EU AI Act Article 72 and any associated delegated acts at your audit cycle. See the regulation text: https://eur-lex.europa.eu/eli/reg/2024/1689/oj -->
+- **Regulatory (EU AI Act Article 72, sector-specific rules).** Article 72 itself does not fix a single retention figure; practice aligns post-market monitoring records with [Article 11's](https://eur-lex.europa.eu/eli/reg/2024/1689/oj) technical-documentation horizon of 10 years post-market for high-risk systems. Sector-specific rules may extend this; confirm at your audit cycle.
 - **Internal governance.** Driven by your platform's own promises.
 
 The horizons are a per-tenant policy, not a fleet default. A tenant subject to EU AI Act high-risk classification has a longer horizon than one running internal-only workloads. The record store partitions by horizon so that older records age out of tenants that do not need them while being preserved for tenants that do.

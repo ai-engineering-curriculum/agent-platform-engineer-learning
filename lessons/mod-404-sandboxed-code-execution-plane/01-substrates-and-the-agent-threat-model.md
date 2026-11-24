@@ -28,7 +28,7 @@ Drift off this slice and you re-import problems the other planes already solved 
 
 Pin the threat model to two published, maintained artefacts:
 
-- **OWASP Top 10 for LLM Applications** — the baseline the whole platform defends against; risks include prompt injection (LLM01), insecure output handling (LLM02), sensitive information disclosure (LLM06), excessive agency (LLM08), and others whose current numbering you should check at your onboarding. <!-- needs-research: confirm the current LLM Top-10 revision number and which risks are IDed as LLMxx in the version you cite; the list reshuffles across major revisions. -->
+- **OWASP Top 10 for LLM Applications** — the baseline the whole platform defends against; in the [2025 revision](https://genai.owasp.org/llm-top-10/) risks include prompt injection (LLM01), sensitive information disclosure (LLM02), improper output handling (LLM05), and excessive agency (LLM06). The list reshuffles across major revisions; verify numbering against the revision you cite.
 - **OWASP Agentic AI — Threats and Mitigations** — the agent-specific extension, enumerating threats around tool misuse, memory poisoning, delegated-authority abuse, and autonomous-action blast radius.
 
 Against the sandbox plane specifically, three classes of attack dominate:
@@ -129,7 +129,7 @@ Do not use when: the tool code is arbitrary language / native binary / anything-
 | Primary deployment references | AWS Lambda / Fargate | Google Cloud Run / App Engine std | OpenShift sandboxed containers, Confidential Containers | Fastly Compute@Edge, Cloudflare Workers, Shopify Functions, Pyodide-based notebook sandboxes |
 | What an escape costs | Guest kernel + VMM + KVM exploits | gVisor Sentry + limited host-syscall exploit | Guest kernel + VMM + KVM exploits | Host-process capability bug or runtime escape |
 
-(`Primary deployment references` are the headline production users of each substrate; when the vendor landscape changes, verify.) <!-- needs-research: verify the current state of GPU support in Firecracker and Kata and the WASM-component-model-based exposure of GPU-adjacent resources through WASI at the time of reading. -->
+(`Primary deployment references` are the headline production users of each substrate; when the vendor landscape changes, verify. Firecracker continues to omit PCIe/GPU passthrough as a deliberate attack-surface decision; Kata's VFIO-based GPU passthrough is supported with QEMU-backed and Confidential-Containers configurations per the [Kata GPU-passthrough docs](https://github.com/kata-containers/kata-containers/blob/main/docs/use-cases/NVIDIA-GPU-passthrough-and-Kata.md), typically single-GPU cold-plug only.)
 
 Numbers are *orders of magnitude* and *relative orderings* — not benchmark figures to quote. The absolute numbers you ship against must come from your own measurements on your own hardware. Vendor-published boot times generally reflect best-case snapshot-restore in their best-case configuration; your fleet's p99 will differ.
 
